@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kiểm tra dấu hiệu chia hết</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-drak">
+    <div class="max-w-4xl mx-auto bg-black p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4 text-center">Kiểm tra dấu hiệu chia hết</h1>
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <input type="number" id="numberInput" class="border p-2 rounded w-full sm:w-1/3" placeholder="Nhập số nguyên">
+            <select id="divisorSelect" class="border p-2 rounded w-full sm:w-1/3">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+            </select>
+            <button onclick="checkDivisibility()" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">OK</button>
+        </div>
+        <textarea id="resultArea" class="w-full h-64 p-2 border rounded" readonly></textarea>
+        <h2 class="text-xl font-semibold mt-6 mb-2">Bảng dấu hiệu chia hết</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ước số</th>
+                        <th>Điều kiện chia hết</th>
+                        <th>Số được ví dụ</th>
+                        <th>Xét ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Bất kỳ số nào</td><td>2</td><td>chia hết cho 1.</td></tr>
+                    <tr><td>2</td><td>Chữ số tận cùng (hàng đơn vị) là chẵn (0, 2, 4, 6, hay 8).</td><td>1294</td><td>chữ số 4 chẵn nên chia hết cho 2.</td></tr>
+                    <tr><td>3</td><td>Cộng các chữ số của số cần kiểm tra. Tổng phải chia hết cho 3.</td><td>405.636</td><td>405 → 4 + 0 + 5 = 9 và 636 → 6 + 3 + 6 = 15, cả hai số đều chia hết cho 3.</td></tr>
+                    <tr><td>4</td><td>Hai chữ số cuối cùng tạo thành một số chia hết cho 4.</td><td>40.832</td><td>có 32 chia hết cho 4.</td></tr>
+                    <tr><td>5</td><td>Chữ số tận cùng là 0 hoặc 5.</td><td>495</td><td>chữ số tận cùng là 5.</td></tr>
+                    <tr><td>6</td><td>Số chia hết cho cả 2 và 3 thì chia hết cho 6.</td><td>1458</td><td>có 1 + 4 + 5 + 8 = 18, nên nó chia hết cho 3 và chữ số tận cùng là chẵn, vì thế nó chia hết cho 6.</td></tr>
+                    <tr><td>7</td><td>Lấy 5 nhân với chữ số tận cùng rồi cộng vào phần còn lại của số thu được một số chia hết cho 7.</td><td>483</td><td>có 48 + (3 × 5) = 63 = 7 × 9.</td></tr>
+                    <tr><td>8</td><td>Ba chữ số sau cùng tạo thành số chia hết cho 8.</td><td>34.152</td><td>chỉ cần xét tính chia hết cho 152: = 19 × 8.</td></tr>
+                    <tr><td>9</td><td>Tính tổng các chữ số, được kết quả chia hết cho 9.</td><td>2880</td><td>có 2 + 8 + 8 + 0 = 18: có 1 + 8 = 9.</td></tr>
+                    <tr><td>10</td><td>Chữ số hàng đơn vị là 0.</td><td>130</td><td>chữ số hàng đơn vị là 0.</td></tr>
+                    <tr><td>11</td><td>Lập tổng xen kẽ đan dấu giữa các chữ số, được kết quả phải chia hết cho 11.</td><td>918.082</td><td>có 9 − 1 + 8 − 0 + 8 − 2 = 22 = 2 × 11.</td></tr>
+                    <tr><td>12</td><td>Số đó chia hết cho cả 3 và 4.</td><td>324</td><td>chia hết cho cả 3 và 4.</td></tr>
+                    <tr><td>13</td><td>Cộng thêm 4 lần chữ số hàng đơn vị vào phần còn lại, kết quả phải chia hết cho 13.</td><td>637</td><td>63 + 7 × 4 = 91, 9 + 1 × 4 = 13.</td></tr>
+                    <tr><td>14</td><td>Số đó chia hết cho cả 2 và 7.</td><td>224</td><td>sử dụng tính chất chia hết cho 2 và 7 ta thấy nó đều chia hết.</td></tr>
+                    <tr><td>15</td><td>Số đó chia hết cho cả 3 và 5.</td><td>390</td><td>nó chia hết cho cả 3 và 5.</td></tr>
+                    <tr><td>16</td><td>Bốn chữ số tận cùng phải chia hết cho 16.</td><td>157.648</td><td>7.648 = 478 × 16.</td></tr>
+                    <tr><td>17</td><td>Trừ 5 lần chữ số tận cùng vào phần còn lại, được số chia hết cho 17.</td><td>221</td><td>22 − 1 × 5 = 17.</td></tr>
+                    <tr><td>18</td><td>Số đó chia hết cho cả 2 và 9.</td><td>342</td><td>chia hết cho cả 2 và 9.</td></tr>
+                    <tr><td>19</td><td>Cộng thêm hai lần chữ số tận cùng vào phần còn lại.</td><td>437</td><td>43 + 7 × 2 = 57.</td></tr>
+                    <tr><td>20</td><td>Số đó chia hết cho 10, và chữ số hàng chục là chẵn.</td><td>360</td><td>chia hết cho 10, và 6 là chẵn.</td></tr>
+                    <tr><td>21</td><td>Số đó chia hết cho cả 3 và 7.</td><td>231</td><td>chia hết cho cả 3 và 7.</td></tr>
+                    <tr><td>22</td><td>Số đó chia hết cho cả 2 và 11.</td><td>352</td><td>chia hết cho cả 2 và 11.</td></tr>
+                    <tr><td>23</td><td>Cộng 7 lần chữ số cuối vào phần còn lại.</td><td>3128</td><td>312 + 8 × 7 = 368: 36 + 8 × 7 = 92.</td></tr>
+                    <tr><td>24</td><td>Số đó chia hết cho cả 3 và 8.</td><td>552</td><td>chia hết cho cả 3 và 8.</td></tr>
+                    <tr><td>25</td><td>Xét số tạo bởi hai chữ số cuối.</td><td>134.250</td><td>50 chia hết cho 25.</td></tr>
+                    <tr><td>26</td><td>Số đó chia hết cho cả 2 và 13.</td><td>156</td><td>chia hết cho cả 2 và 13.</td></tr>
+                    <tr><td>27</td><td>Tính tổng từng nhóm ba chữ số từ phải qua trái.</td><td>2.644.272</td><td>2 + 644 + 272 = 918 = 34 × 27.</td></tr>
+                    <tr><td>28</td><td>Số đó chia hết cho cả 4 và 7.</td><td>140</td><td>chia hết cho cả 4 và 7.</td></tr>
+                    <tr><td>29</td><td>Cộng thêm ba lần chữ số cuối cùng vào phần còn lại.</td><td>348</td><td>34 + 8 × 3 = 58.</td></tr>
+                    <tr><td>30</td><td>Số đó chia hết cho cả 3 và 10.</td><td>270</td><td>chia hết cho cả 3 và 10.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
